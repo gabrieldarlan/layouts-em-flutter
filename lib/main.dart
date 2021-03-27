@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lojinha_alura/modelo/item_carrinho.dart';
 import 'package:lojinha_alura/paginas/carrinho.dart';
+import 'package:lojinha_alura/paleta_cores.dart';
 import 'package:lojinha_alura/widgets/appbar_customizada.dart';
 import 'package:lojinha_alura/widgets/grid_produtos.dart';
 
@@ -18,8 +20,20 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: PaletaCores().lilas,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        textTheme: TextTheme(
+          headline1: TextStyle(
+              fontSize: 20,
+              fontFamily: 'Alata',
+              fontWeight: FontWeight.bold,
+              color: Colors.black),
+          headline2: TextStyle(
+              fontSize: 20,
+              fontFamily: 'Alata',
+              fontWeight: FontWeight.bold,
+              color: Colors.white),
+        ),
       ),
       home: Inicio(),
     );
@@ -27,6 +41,8 @@ class MyApp extends StatelessWidget {
 }
 
 class Inicio extends StatelessWidget {
+  static List<ItemCarrinho> itensCarrinho = List();
+
   final List moveis = [
     {
       "titulo": "Mesa",
