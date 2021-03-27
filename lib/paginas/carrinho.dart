@@ -7,7 +7,7 @@ class Carrinho extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBarCustomizada(titulo: 'Carrinho',ehPaginaCarrinho: true,),
-      body: Text('Estamos no carrinho, hummm que gostoso'),
+      body: Text('Estamos no carrinho'),
     );
   }
 }
