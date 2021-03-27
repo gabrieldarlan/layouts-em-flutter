@@ -8,8 +8,12 @@ import 'package:lojinha_alura/widgets/texto_detalhes.dart';
 class CardDetalhes extends StatelessWidget {
   final formatacaoReais = NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$');
   final Movel movel;
+  final Function atualizaPagina;
 
-  CardDetalhes({this.movel});
+  CardDetalhes({
+    this.movel,
+    this.atualizaPagina,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +43,13 @@ class CardDetalhes extends StatelessWidget {
                 FlatButton(
                   color: Theme.of(context).primaryColor,
                   onPressed: () {
-                    _adicionarItemCarrinho(ItemCarrinho(
-                      movel: movel,
-                      quantidade: 1,
-                    ));
+                    _verificarListaItemCarrinho(
+                      Inicio.itensCarrinho,
+                      ItemCarrinho(
+                        movel: movel,
+                        quantidade: 1,
+                      ),
+                    );
                   },
                   child: Text(
                     'Comprar',
@@ -57,7 +64,18 @@ class CardDetalhes extends StatelessWidget {
     );
   }
 
-  _adicionarItemCarrinho(ItemCarrinho item) {
+  void _adicionarItemCarrinho(ItemCarrinho item) {
     Inicio.itensCarrinho.add(item);
+    atualizaPagina();
+  }
+
+  void _verificarListaItemCarrinho(
+      List<ItemCarrinho> lista, ItemCarrinho item) {
+    int indiceMovel = lista.indexWhere((item) => item.movel == movel);
+    if (indiceMovel >= 0) {
+      lista[indiceMovel].quantidade = lista[indiceMovel].quantidade + 1;
+    } else {
+      _adicionarItemCarrinho(item);
+    }
   }
 }
